@@ -1,35 +1,24 @@
 import pandas as pd
+import pickle
 
 def load_incident_data():
     """
-    Load incident data from CSV and Excel files for the years 2009-2017 and 2018 onwards.
+    Load incident data from pickle file.
     Returns: 
         - incidents: A DataFrame containing the combined incident data.
     """
-    # Load the CSV file for 2009-2017
-    inc_09_17 = pd.read_csv('LFB Incident data from 2009 - 2017.csv', low_memory=False)
-    # Load the Excel file for 2018 onwards
-    inc_18_onwards = pd.read_excel('LFB Incident data from 2018 onwards.csv.xlsx')
-
-    # Concatenate the datasets
-    incidents = pd.concat([inc_09_17, inc_18_onwards], ignore_index=True)
-
+    with open('data/incidents.pkl', 'rb') as f:
+        incidents = pickle.load(f)
     return incidents
 
 def load_mobilisation_data():
     """
-    Load mobilization data from multiple Excel files for the years 2009-2024.
+    Load mobilization data from pickle file.
     Returns: 
         - mobilisation: A DataFrame containing the combined mobilization data.
     """
-    # Load the mobilization datasets
-    mob_09_14 = pd.read_excel('LFB Mobilisation data from January 2009 - 2014.xlsx')
-    mob_15_20 = pd.read_excel('LFB Mobilisation data from 2015 - 2020.xlsx')
-    mob_21_24 = pd.read_excel('LFB Mobilisation data 2021 - 2024.xlsx')
-
-    # Concatenate all the mobilization datasets
-    mobilisation = pd.concat([mob_09_14, mob_15_20, mob_21_24], ignore_index=True)
-
+    with open('data/mobilisation.pkl', 'rb') as f:
+        mobilisation = pickle.load(f)
     return mobilisation
 
 def clean_and_merge_data(incidents, mobilisation):
