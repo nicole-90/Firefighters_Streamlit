@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from functions import load_incident_data, load_mobilisation_data, clean_and_merge_data, drop_duplicates_and_columns, handle_missing_data
+from firefighters_streamlit_functions_part1 import load_incident_data, load_mobilisation_data, clean_and_merge_data, drop_duplicates_and_columns, handle_missing_data
 
 # Title of the app
 st.title("London Fire Brigade Incident & Mobilisation Data")
