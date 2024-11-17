@@ -16,17 +16,17 @@ mobilisation = load_mobilisation_data()
 # Display sample of loaded data
 st.write("Incident data and Mobilization data loaded successfully.")
 
-# Add filter options for Year and Incident Type
+# Add filter options for Year and Incident Group
 st.header("Filter the Data")
 year_filter = st.selectbox("Select Year", options=sorted(incidents['CalYear'].unique()), index=0)
 incident_group_filter = st.selectbox("Select Incident Group", options=sorted(incidents['IncidentGroup'].dropna().unique()), index=0)
 
 
 # Filter the data based on the selected year and incident type
-filtered_incidents = incidents[(incidents['CalYear'] == year_filter) & (incidents['IncidentType'] == incident_type_filter)]
+filtered_incidents = incidents[(incidents['CalYear'] == year_filter) & (incidents['IncidentGroup'] == incident_group_filter)]
 
 # Show filtered dataset preview (first few rows)
-st.write(f"Filtered Dataset for Year: {year_filter} and Incident Type: {incident_type_filter}")
+st.write(f"Filtered Dataset for Year: {year_filter} and Incident Group: {incident_group_filter}")
 st.write(filtered_incidents.head())
 
 # Clean and merge data
