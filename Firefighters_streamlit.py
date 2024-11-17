@@ -19,7 +19,8 @@ st.write("Incident data and Mobilization data loaded successfully.")
 # Add filter options for Year and Incident Type
 st.header("Filter the Data")
 year_filter = st.selectbox("Select Year", options=sorted(incidents['CalYear'].unique()), index=0)
-incident_type_filter = st.selectbox("Select Incident Type", options=sorted(incidents['IncidentType'].unique()), index=0)
+incident_group_filter = st.selectbox("Select Incident Group", options=sorted(incidents['IncidentGroup'].dropna().unique()), index=0)
+
 
 # Filter the data based on the selected year and incident type
 filtered_incidents = incidents[(incidents['CalYear'] == year_filter) & (incidents['IncidentType'] == incident_type_filter)]
