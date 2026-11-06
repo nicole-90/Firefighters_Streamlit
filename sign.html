@@ -1,0 +1,12 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>B&B survey sign</title>
+<style>html,body{margin:0;height:100%;background:#fff}img{width:100vw;height:100vh;object-fit:contain;display:block}
+#tip{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);background:#141518;color:#fff;font:16px system-ui,sans-serif;padding:10px 16px;border-radius:10px}</style></head>
+<body><img src="qr-wide.png" alt="Scan to take the B&B survey"><div id="tip">Tap anywhere for full screen</div>
+<script>
+document.addEventListener("click",()=>{const d=document.documentElement;(d.requestFullscreen||d.webkitRequestFullscreen||function(){}).call(d);
+try{screen.orientation.lock("landscape").catch(()=>{})}catch(e){}
+document.getElementById("tip").style.display="none";
+if("wakeLock" in navigator){navigator.wakeLock.request("screen").catch(()=>{})}});
+document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement)document.getElementById("tip").style.display="block"});
+</script></body></html>
