@@ -155,7 +155,8 @@ function start(){
 function done(){
   const r=results();
   const t=new Date().toTimeString().slice(0,8);
-  const line=`B&B survey · ${S.name.trim()} · B${r.b} · I${r.inst} · ${t}`;
+  const code=String(((r.b*10+r.inst)*1237+4242)%9973).padStart(4,"0");
+  const line=`B&B survey · ${S.name.trim()} · code ${code} · ${t}`;
   const href=`sms:${SMS}?&body=${encodeURIComponent(line)}`;
   app.innerHTML = `
     <div class="card result">
@@ -179,9 +180,9 @@ function host(){
     </div>
     <div id="out"></div>`;
   app.querySelector("#run").onclick=()=>{
-    const re=/B&B survey · (.+?) · B(\d+) · I(\d+) · (\d\d:\d\d:\d\d)/g;
+    const re=/B&B survey · (.+?) · code (\d{4}) · (\d\d:\d\d:\d\d)/g;
     const by={}; let m; const tx=app.querySelector("#tx").value;
-    while((m=re.exec(tx))){by[m[1].trim().toLowerCase()]={name:m[1].trim(),b:+m[2],i:+m[3],t:m[4]};}
+    while((m=re.exec(tx))){const n=(((+m[2]-4242)%9973+9973)*4015)%9973;by[m[1].trim().toLowerCase()]={name:m[1].trim(),b:Math.floor(n/10),i:n%10,t:m[3]};}
     const ppl=Object.values(by);
     if(!ppl.length){app.querySelector("#out").innerHTML='<p class="note">No survey messages found.</p>';return;}
     ppl.sort((a,b)=>b.b-a.b||a.t.localeCompare(b.t));
